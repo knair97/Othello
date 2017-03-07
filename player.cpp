@@ -66,13 +66,8 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             m = new Move(i, j);
             if (board.checkMove(m, player_side))
             {
-<<<<<<< HEAD
                 board.doMove(m, player_side);
                 return m;
-=======
-                std::cerr << i << " " << j << std::endl;
-                break;
->>>>>>> 8043bb3d1b2d3df0894e4dcbdcc662e94d7a01f5
             }
             else
             {
@@ -86,11 +81,8 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
         m = nullptr;
     }
-<<<<<<< HEAD
 
     m = nullptr;
-=======
->>>>>>> 8043bb3d1b2d3df0894e4dcbdcc662e94d7a01f5
     return m;
     
 }
