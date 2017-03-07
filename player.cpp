@@ -1,5 +1,5 @@
-#include "player.hpp"
 
+<<<<<<< HEAD
 /**
  * small change to the player.cpp file
  */
@@ -79,3 +79,5 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     return move;
     
 }
+=======
+>>>>>>> ed1d4af6c2651223289be2d0b10e19dacebfa2f9
