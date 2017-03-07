@@ -2,7 +2,7 @@
 /**
  * small change to the player.cpp file
  */
- 
+#include "player.hpp"
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish
@@ -63,11 +63,12 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 		return nullptr;
 	}
 	
+    Move *move = new Move(0, 0);
     for (int i = 0; i < 8; i++) 
     {
         for (int j = 0; j < 8; j++) 
         {
-            Move move = Move(i, j);
+            move = Move(i, j);
             if (board.checkMove(&move, player_side))
             {
 				break;
