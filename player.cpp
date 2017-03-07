@@ -104,8 +104,6 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     }
 
-    possible_moves.clear();
-    score = -99999999;
     board.doMove(best_move, player_side);
     return best_move;
     
