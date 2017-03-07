@@ -20,12 +20,12 @@ Player::Player(Side side) {
      player_side = side;
      if ( side == BLACK)
      {
-		 opponent_side = WHITE;
-	 }
-	 else
-	 {
-		 opponent_side = BLACK;
-	 }
+         opponent_side = WHITE;
+     }
+     else
+     {
+         opponent_side = BLACK;
+     }
 }
 
 /*
@@ -54,12 +54,11 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      */
     if ( opponentsMove != nullptr)
     {
-		board.doMove( opponentsMove, opponent_side);
+        board.doMove( opponentsMove, opponent_side);
     }
     
-	Move * m;
-	
-    Move *move = new Move(0, 0);
+    Move *m;
+    
     for (int i = 0; i < 8; i++) 
     {
         for (int j = 0; j < 8; j++) 
@@ -67,19 +66,23 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             m = new Move(i, j);
             if (board.checkMove(m, player_side))
             {
-				break;
-			}
-			else
-			{
-				delete m;
-			}
+                board.doMove(m, player_side);
+                return m;
+            }
+            else
+            {
+                delete m;
+            }
         }
     }
     
+
     if (!board.hasMoves(player_side))
     {
-		m = nullptr;
-	}
+        m = nullptr;
+    }
+
+    m = nullptr;
     return m;
     
 }
