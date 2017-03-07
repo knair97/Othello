@@ -1,4 +1,4 @@
-
+#include "player.hpp"
 /**
  * small change to the player.cpp file
  */
@@ -58,24 +58,29 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 		board.doMove( opponentsMove, opponent_side);
     }
     
-    if (!board.hasMoves(player_side))
-    {
-		return nullptr;
-	}
+	Move * m;
 	
     for (int i = 0; i < 8; i++) 
     {
         for (int j = 0; j < 8; j++) 
         {
-            Move move = Move(i, j);
-            if (board.checkMove(&move, player_side))
+            m = new Move(i, j);
+            if (board.checkMove(m, player_side))
             {
 				break;
+			}
+			else
+			{
+				delete m;
 			}
         }
     }
     
-    return move;
+    if (!board.hasMoves(player_side))
+    {
+		m = nullptr;
+	}
+    return m;
     
 }
 
