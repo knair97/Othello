@@ -54,6 +54,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */
+<<<<<<< HEAD
     if ( opponentsMove != nullptr)
     {
 		board.doMove( opponentsMove, opponent_side);
@@ -78,4 +79,9 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     
     return move;
     
+=======
+    board.doMove(opponentsMove, opponent_side);
+    board.doMove(opponentsMove, opponent_side);
+    return nullptr;
+>>>>>>> d57851a2193fbfc264c41afc88bc6c8efbabedc1
 }
