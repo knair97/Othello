@@ -4,6 +4,7 @@
 #include <iostream>
 #include "common.hpp"
 #include "board.hpp"
+#include <vector>
 using namespace std;
 
 class Player {
@@ -21,6 +22,7 @@ private:
 	Board board;
 	Side opponent_side;
 	Side player_side;
+	int get_score( Move * m);
 };
 
 #endif

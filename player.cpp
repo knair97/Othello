@@ -52,13 +52,19 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */
+
     if ( opponentsMove != nullptr)
     {
         board.doMove( opponentsMove, opponent_side);
     }
     
     Move *m;
-    Move **possible_moves = new Move*[
+    vector<Move*> possible_moves;
+    int score = -88888;
+    int new_score = -99999;
+    Move *best_move = new Move(1, 1);
+    
+    
     for (int i = 0; i < 8; i++) 
     {
         for (int j = 0; j < 8; j++) 
@@ -66,8 +72,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             m = new Move(i, j);
             if (board.checkMove(m, player_side))
             {
-                board.doMove(m, player_side);
-                return m;
+                possible_moves.push_back(m);
             }
             else
             {
@@ -81,9 +86,49 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
         m = nullptr;
     }
+    
+    for (unsigned int i = 0; i < possible_moves.size(); i++)
+    {
+        new_score = Player::get_score( possible_moves[i]);
+        if (new_score >= score)
+        {
+            score = new_score;
+            best_move = possible_moves[i];
+        }
 
-    m = nullptr;
-    return m;
+
+    }
+
+    board.doMove(best_move, player_side);
+    return best_move;
     
 }
 
+int Player::get_score( Move * m )
+{
+	Board *new_board;
+	new_board = board.copy();
+    new_board->doMove(m, player_side);
+    int score = new_board->count(player_side) 
+            - new_board->count(opponent_side);
+	if ((m->getX() == 7 && m->getY() == 7) ||
+		(m->getX() == 0 && m->getY() == 0) ||
+		(m->getX() == 0 && m->getY() == 7) ||
+		(m->getX() == 7 && m->getY() == 0)  )
+	{
+		score *= 3;
+	}
+
+	if ((m->getX() == 7 && m->getY() == 6) ||
+		(m->getX() == 6 && m->getY() == 7) ||
+		(m->getX() == 0 && m->getY() == 1) ||
+		(m->getX() == 1 && m->getY() == 0) ||
+		(m->getX() == 6 && m->getY() == 0) ||
+		(m->getX() == 7 && m->getY() == 1) ||
+		(m->getX() == 0 && m->getY() == 6) ||
+		(m->getX() == 1 && m->getY() == 7)  )
+	{
+		score *= -3;
+	}
+	return score;
+}
