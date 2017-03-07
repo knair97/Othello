@@ -52,12 +52,18 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */
+
     if ( opponentsMove != nullptr)
     {
         board.doMove( opponentsMove, opponent_side);
     }
     
     Move *m;
+    vector<Move*> possible_moves;
+    int score = -88888;
+    int new_score = -99999;
+    Move *best_move = new Move(1, 1);
+    Board *new_board;
     
     for (int i = 0; i < 8; i++) 
     {
@@ -66,8 +72,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             m = new Move(i, j);
             if (board.checkMove(m, player_side))
             {
-                board.doMove(m, player_side);
-                return m;
+                possible_moves.push_back(m);
             }
             else
             {
@@ -81,9 +86,28 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
         m = nullptr;
     }
+    
+    for (unsigned int i = 0; i < possible_moves.size(); i++)
+    {
+        new_board = board.copy();
+        new_board->doMove(possible_moves[i], player_side);
+        new_score = new_board->count(player_side) 
+            - new_board->count(opponent_side);
+        std::cerr << new_score << std::endl;
+        std::cerr << score << std::endl;
+        if (new_score >= score)
+        {
+            score = new_score;
+            best_move = possible_moves[i];
+        }
 
-    m = nullptr;
-    return m;
+
+    }
+
+    possible_moves.clear();
+    score = -99999999;
+    board.doMove(best_move, player_side);
+    return best_move;
     
 }
 
