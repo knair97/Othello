@@ -58,7 +58,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     }
     
     Move *m;
-    
+    Move **possible_moves = new Move*[
     for (int i = 0; i < 8; i++) 
     {
         for (int j = 0; j < 8; j++) 
