@@ -69,7 +69,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         for (int j = 0; j < 8; j++) 
         {
             Move move = Move(i, j);
-            if (checkMove(&move, side))
+            if (board.checkMove(&move, side))
             {
 				break;
 			}
