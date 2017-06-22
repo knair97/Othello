@@ -5,6 +5,7 @@
 #include "common.hpp"
 #include "board.hpp"
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Player {
@@ -14,6 +15,8 @@ public:
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
+    int minimax(Board *board_node, int depth, Side side);
+    void set_board(Board *board);
 
     // Flag to tell if the player is running within the test_minimax context
     bool testingMinimax;
@@ -26,3 +29,6 @@ private:
 };
 
 #endif
+
+
+
